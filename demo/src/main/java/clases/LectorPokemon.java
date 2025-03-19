@@ -3,14 +3,14 @@ package clases;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class LectorPokemon {
 
     public static final String RUTA_ARCHIVO = "C:\\Users\\Admin\\Documents\\Yio\\U\\HT6\\demo\\src\\main\\java\\clases\\pokemon_data_pokeapi.csv";
+
     public static Map<String, Pokemon> readPokemons() throws IOException {
         Map<String, Pokemon> pokemonMap = new HashMap<>();
 
@@ -23,7 +23,7 @@ public class LectorPokemon {
                     isFirstLine = false;
                     continue;
                 }
-                String[] columns = line.split(",");
+                String[] columns = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Pokemon pokemon = new Pokemon(columns);
                 pokemonMap.put(pokemon.getName(), pokemon);
             }

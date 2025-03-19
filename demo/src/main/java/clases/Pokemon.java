@@ -9,12 +9,11 @@ public class Pokemon {
     private String type2;
     private List<String> abilities;
 
-
     public Pokemon(String[] columns) {
         this.name = columns[0];
         this.type1 = columns[2];
         this.type2 = columns[3];
-        this.abilities = Arrays.asList(columns[7].split(";"));
+        this.abilities = Arrays.asList(columns[7].replace("\"", "").split(", "));
     }
 
     public String getName() {
@@ -35,9 +34,7 @@ public class Pokemon {
 
     @Override
     public String toString() {
-
         String abilitiesStr = String.join(", ", abilities);
-
         return "Pokemon{" +
                 "nombre='" + name + '\'' +
                 ", tipo1='" + type1 + '\'' +
